@@ -5,7 +5,7 @@
 	    <title>ScratchGraph</title>
     </head>
     <body>
-    <p><a href="/">Home</a> | about
+    <p><a href="/">Home</a> | about</p>
     <p>Scratchgraph is a Scratch projects analyzer that focuses on communication between sprites.</p>
     <p>Made by <a href="http://twitter.com/dnikolos">@dnikolos</a></p>
     <p>Using <a href="http://www.heroku.com">Heroku</a> with <https://www.djangoproject.com/>Django</a> and the <a href="http://www.graphdracula.net/">Dracula Graph Library</a>.</p>
