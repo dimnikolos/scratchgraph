@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset=utf-8 />
+	    <title></title>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            <!--  Dracula  -->
+            <!--  An extension of Raphael for connecting shapes -->
+            <script type="text/javascript" src="./static/dracula/js/dracula_graffle.js"></script>
+            <!--  Graphs  -->
+            <script type="text/javascript" src="./static/dracula/js/dracula_graph.js"></script>
+            <script type="text/javascript" src="./static/dracula/js/dracula_algorithms.js"></script>
+    </head>
+    <body>
+        <p><a href="/">Home</a> | <a href="about">about</a></p>
+        Communication graph<br/>
+        <div id="canvas"></div>
+        <script type="text/javascript">
+        {% autoescape off %}
+        {{ graph }}
+        {% endautoescape %}
+        </script>
+        Communication table<br/>
+	{% autoescape off %}
+	{{ table }}     
+	{% endautoescape %}
+    </body>
+    </html>
+
