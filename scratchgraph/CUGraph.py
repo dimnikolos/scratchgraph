@@ -65,7 +65,7 @@ class CUGraph():
                 returnstr += """ 
                     var layouter = new Graph.Layout.Spring(g);\n
                     layouter.layout();\n
-                    var renderer = new Graph.Renderer.Raphael('canvas', g, 1280, 800);\n
+                    var renderer = new Graph.Renderer.Raphael('canvas', g, 800, 600);\n
                     renderer.draw();\n
                     """
             else:

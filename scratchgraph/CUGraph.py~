@@ -32,9 +32,9 @@ class CUGraph():
 				#according to type
 				if (cu.getCUType() == cuType):
 					for aWriter in cu.getWriters():
-						edges.append((aWriter,cu.getName()))
+						edges.append((unidecode(aWriter),unidecode(cu.getName())))
 					for aReader in cu.getReaders():
-						edges.append((cu.getName(),aReader))
+						edges.append((unidecode(cu.getName()),unidecode(aReader)))
 		else:
 			for cu in self.CUCollection.getCollection():
 				#cuType filters the communication units
@@ -44,7 +44,7 @@ class CUGraph():
 						for aWriter in cu.getWriters():
 							#do not remove duplicates
 							#if ((self.nameList.index(aReader),self.nameList.index(aWriter)) not in edges):
-								edges.append((aWriter,aReader))
+								edges.append((unidecode(aWriter),unidecode(aReader)))
 		return edges
 	
 	def __str__(self):

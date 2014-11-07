@@ -21,16 +21,21 @@ def index(request):
     if request.method == 'POST':
         form = NameForm(request.POST,request.FILES)
         if form.is_valid():
-            scratchJSON = ScratchReader(request.FILES['your_file']).parseJSON()
-            scratchInfo = JSONinfo(scratchJSON)
-            (floatingScripts,sprites) = jsontoSprites(scratchJSON)
-            cul = CompCUs(scratchInfo,sprites).parseCUs()
-            cug = CUGraph(cul,sprites)
-            graphJSstring = str(cug)
+            sr = ScratchReader(request.FILES['your_file'])
+            if (sr!=None):
+                scratchJSON = sr.parseJSON()
+                scratchInfo = JSONinfo(scratchJSON)
+                (floatingScripts,sprites) = jsontoSprites(scratchJSON)
+                cul = CompCUs(scratchInfo,sprites).parseCUs()
+                cug = CUGraph(cul,sprites)
+                graphJSstring = str(cug)
+            else:
+                graphJSstring = "Problem with sb2 file"
+                cul =""
             return render(request, 'main.html',{'table':str(cul),'graph':graphJSstring})
     else:
         form = NameForm()
-    return render(request, 'home.html',{'form':form,'table':""}, context_instance = RequestContext(request))
+    return render(request, 'home.html',{'form':form}, context_instance = RequestContext(request))
 
 def about(request):
        return render(request, 'about.html')

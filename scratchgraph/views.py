@@ -22,11 +22,15 @@ def index(request):
         form = NameForm(request.POST,request.FILES)
         if form.is_valid():
             scratchJSON = ScratchReader(request.FILES['your_file']).parseJSON()
-            scratchInfo = JSONinfo(scratchJSON)
-            (floatingScripts,sprites) = jsontoSprites(scratchJSON)
-            cul = CompCUs(scratchInfo,sprites).parseCUs()
-            cug = CUGraph(cul,sprites)
-            graphJSstring = str(cug)
+            if (scratchJSON):
+                scratchInfo = JSONinfo(scratchJSON)
+                (floatingScripts,sprites) = jsontoSprites(scratchJSON)
+                cul = CompCUs(scratchInfo,sprites).parseCUs()
+                cug = CUGraph(cul,sprites)
+                graphJSstring = str(cug)
+            else:
+                graphJSstring = "Problem with sb2 file"
+                cul =""
             return render(request, 'main.html',{'table':str(cul),'graph':graphJSstring})
     else:
         form = NameForm()
