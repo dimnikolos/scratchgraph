@@ -108,14 +108,14 @@ class CommUnit:
 		"""
 	        returnString = ""
         	if (self.cuType == "message"):
-        	    returnString = u"<tr><td><b>"+self.cuName + u"</b><br/>" + u"Receivers:"
+        	    returnString = u"<tr><td><b>" + self.cuType + ": " + self.cuName + u"</b><br/>" + u"Receivers: "
 		else:
-        	    returnString = u"<tr><td><b>"+self.cuName + u"</b><br/>" + u"Readers:"
+        	    returnString = u"<tr><td><b>" + self.cuType + ": " + self.cuName + u"</b><br/>" + u"Readers: "
 		returnString += ','.join(self.readers)
 		if (self.cuType == "message"):
-			returnString += u"<br/>Senders:"
+			returnString += u"<br/>Senders: "
 		else:
-			returnString += u"<br/>Writers:"
+			returnString += u"<br/>Writers: "
 		"""for writer in self.writers:
 			returnString += unicode(writer) + ','
 		"""
@@ -187,7 +187,7 @@ class CUCollection():
 		__unicode__(self)
 		a report of all communication units in the collection
 		"""
-		returnString = "<table border='1'>"
+		returnString = "<table width='70%' border='1'>"
 		for cu in self.collection:
 			returnString += unicode(cu)
                 returnString += "</table>"

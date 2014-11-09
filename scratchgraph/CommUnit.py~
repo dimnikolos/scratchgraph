@@ -108,15 +108,14 @@ class CommUnit:
 		"""
 	        returnString = ""
         	if (self.cuType == "message"):
-        	    returnString = u"<tr><td><b>"+self.cuName + u"</b><br/>" + u"Receivers:"
+        	    returnString = u"<tr><td><b>" + self.cuType + ": " + self.cuName + u"</b><br/>" + u"Receivers: "
 		else:
-        	    returnString = u"<tr><td><b>"+self.cuName + u"</b><br/>" + u"Readers:"
+        	    returnString = u"<tr><td><b>" + self.cuType + ": " + self.cuName + u"</b><br/>" + u"Readers: "
 		returnString += ','.join(self.readers)
-                returnString += "<br/>"
 		if (self.cuType == "message"):
-			returnString += u"<tr><td>Senders:"
+			returnString += u"<br/>Senders: "
 		else:
-			returnString += u"<tr><td>Writers:"
+			returnString += u"<br/>Writers: "
 		"""for writer in self.writers:
 			returnString += unicode(writer) + ','
 		"""
