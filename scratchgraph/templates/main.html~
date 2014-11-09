@@ -17,14 +17,18 @@
         <h1>
         {{ filename}}
         </h1> 
-        Communication graph<br/>
+        <h2>
+        Communication graph
+        </h2>
         <div id="canvas"></div>
         <script type="text/javascript">
         {% autoescape off %}
         {{ graph }}
         {% endautoescape %}
         </script>
+        <h2>
         Communication table<br/>
+        </h2>
 	{% autoescape off %}
 	{{ table }}     
 	{% endautoescape %}
