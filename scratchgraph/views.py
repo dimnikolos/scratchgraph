@@ -21,6 +21,7 @@ def index(request):
     if request.method == 'POST':
         form = NameForm(request.POST,request.FILES)
         if form.is_valid():
+            projectName = request.FILES['your_file'].name
             scratchJSON = ScratchReader(request.FILES['your_file']).parseJSON()
             if (scratchJSON):
                 scratchInfo = JSONinfo(scratchJSON)
@@ -29,9 +30,10 @@ def index(request):
                 cug = CUGraph(cul,sprites)
                 graphJSstring = str(cug)
             else:
+                projectName = "Problem with file"
                 graphJSstring = "Problem with sb2 file"
                 cul =""
-            return render(request, 'main.html',{'table':str(cul),'graph':graphJSstring})
+            return render(request, 'main.html',{'filename':projectName,'table':str(cul),'graph':graphJSstring})
     else:
         form = NameForm()
     return render(request, 'home.html',{'form':form}, context_instance = RequestContext(request))

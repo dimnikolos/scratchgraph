@@ -13,7 +13,10 @@
             <script type="text/javascript" src="./static/dracula/js/dracula_algorithms.js"></script>
     </head>
     <body>
-        <p><a href="/">Home</a> | <a href="about">./about</a></p>
+        <p><a href="/">Home</a> | <a href="about">about</a></p>
+        <h1>
+        {{ filename}}
+        </h1> 
         Communication graph<br/>
         <div id="canvas"></div>
         <script type="text/javascript">
