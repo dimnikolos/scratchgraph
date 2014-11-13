@@ -33,7 +33,7 @@ def index(request):
                 projectName = "Problem with file"
                 graphJSstring = "Problem with sb2 file"
                 cul =""
-            return render(request, 'main.html',{'table':str(cul),'graph':graphJSstring})
+            return render(request, 'main.html',{'filename':projectName,'table':str(cul),'graph':graphJSstring})
     else:
         form = NameForm()
     return render(request, 'home.html',{'form':form}, context_instance = RequestContext(request))

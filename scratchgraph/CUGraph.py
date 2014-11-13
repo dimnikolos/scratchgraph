@@ -16,58 +16,45 @@ class CUGraph():
 		self.nameList = [sp.name for sp in spriteList]
 		self.spritesNumber = len(spriteList)
 		self.nameList.extend([cu.getName() for cu in self.CUCollection.getCollection()])
-
-	def graphEdges(self,cuType,cuAsNode = False):
+	def strgraphEdges(self):
 		"""
-		graphEdges(self,cuType)
-		returns list of tuples
-		to be used for graphs
+		strgraphEdges(self)
+                returns the edges string for js lib
 		"""
 		
-		edges = []
-		if (cuAsNode):
-			
-			for cu in self.CUCollection.getCollection():
-				#cuType filters the communication units
-				#according to type
-				if (cu.getCUType() == cuType):
-					for aWriter in cu.getWriters():
-						edges.append((unidecode(aWriter),unidecode(cu.getName())))
-					for aReader in cu.getReaders():
-						edges.append((unidecode(cu.getName()),unidecode(aReader)))
-		else:
-			for cu in self.CUCollection.getCollection():
-				#cuType filters the communication units
-				#according to the type
-				if (cu.getCUType() == cuType):
-					for aReader in cu.getReaders():
-						for aWriter in cu.getWriters():
-							#do not remove duplicates
-							#if ((self.nameList.index(aReader),self.nameList.index(aWriter)) not in edges):
-								edges.append((unidecode(aWriter),unidecode(aReader)))
-		return edges
+		returnstr = ""
+                for cu in self.CUCollection.getCollection():
+                    if (cu.cuType == "variable"):
+                       for aWriter in cu.getWriters():
+			   returnstr += 'g.addEdge("' + unidecode(aWriter) + '","' + unidecode("var\\n"+cu.getName()) + '",{directed:true});\n' 
+                       for aReader in cu.getReaders():
+			   returnstr += 'g.addEdge("' + unidecode("var\\n"+cu.getName()) + '","' + unidecode(aReader) + '",{directed:true});\n' 
+                    elif (cu.cuType == "list"):
+                       for aWriter in cu.getWriters():
+			   returnstr += 'g.addEdge("' + unidecode(aWriter) + '","' + unidecode("list\\n"+cu.getName()) + '",{directed:true});\n' 
+                       for aReader in cu.getReaders():
+			   returnstr += 'g.addEdge("' + unidecode("list\\n"+cu.getName()) + '","' + unidecode(aReader) + '",{directed:true});\n' 
+                    elif (cu.cuType == "scene"):
+                       for aWriter in cu.getWriters():
+			   returnstr += 'g.addEdge("' + unidecode(aWriter) + '","' + unidecode("THE SCENE") + '",{directed:true});\n' 
+                       for aReader in cu.getReaders():
+			   returnstr += 'g.addEdge("' + unidecode("THE SCENE") + '","' + unidecode(aReader) + '",{directed:true});\n' 
+                    elif (cu.cuType == "message"):
+                       for aWriter in cu.getWriters():
+                           for aReader in cu.getReaders():
+			       returnstr += 'g.addEdge("' + unidecode(aWriter) + '","' + unidecode(aReader) + '",{directed:true, label: "' + unidecode(cu.getName()) + '"});\n' 
+                    else:
+                      returnstr = "Problem"
+                      break
+		return returnstr
 	
 	def __str__(self):
-            #allEdges is consists of edges from variables/messages/lists
-	    allEdges = self.graphEdges("variable",True)
-	    #REMOVE DUPLICATES
-            #allEdges.extend([edge for edge in self.graphEdges("list") if edge not in allEdges])
-            #allEdges.extend([edge for edge in self.graphEdges("message") if edge not in allEdges])
-            #allEdges.extend([edge for edge in self.graphEdges("scene",True) if edge not in allEdges])
-            #ALLOW DUPLICATES
-            allEdges.extend([edge for edge in self.graphEdges("list",True)])
-            allEdges.extend([edge for edge in self.graphEdges("message",False)])
-            allEdges.extend([edge for edge in self.graphEdges("scene",True)])
-            if (len(allEdges)>0):
                 returnstr = "var g = new Graph();\n"
-                for anEdge in allEdges:
-                    returnstr += 'g.addEdge("' + str(anEdge[0])+ '","' + str(anEdge[1]) + '",{directed:true});\n'
+                returnstr += self.strgraphEdges()
                 returnstr += """ 
                     var layouter = new Graph.Layout.Spring(g);\n
                     layouter.layout();\n
                     var renderer = new Graph.Renderer.Raphael('canvas', g, 800, 600);\n
                     renderer.draw();\n
                     """
-            else:
-                returnstr = 'document.write("No communications");\n'
-            return returnstr
+                return returnstr
