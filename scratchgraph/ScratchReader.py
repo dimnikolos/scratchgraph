@@ -3,6 +3,17 @@ import zipfile
 import json
 
 class ScratchReader():
+    def __init__(self,thejson):
+        self.thejson = thejson
+        self.projectJSON = []
+
+    def parseJSON(self):
+	try:
+	    return(json.loads(self.thejson.replace('\t', '').replace('\n','').replace('\r','')))
+	except:
+	    return(None)
+ 
+"""
     def __init__(self,thefile):
         self.thefile = thefile
         self.projectJSON = [];
@@ -34,4 +45,4 @@ class ScratchReader():
 		    return(None)
         
     
-
+"""
