@@ -7,11 +7,18 @@
     <body>
     <center>
         <p>Home | <a href="./about">about</a></p>
-        <p>Paste the url of your project</p>
+        <p>Paste the url of your Scratch project:</p>
 	<form action="/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
+          {% csrf_token %}
+          {{ form1 }}
+          <input type="submit" name="URLSubmit" value="Submit" />
+        </form>
+        <br/>OR<br/>
+        <p>Select Scratch project file (.sb2):</p>
+        <form action="/" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          {{ form2 }}
+          <input type="submit" name="FileSubmit" value="Submit" />
         </form>
     </center>
     <script>

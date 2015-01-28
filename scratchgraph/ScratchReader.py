@@ -3,9 +3,11 @@ import zipfile
 import json
 
 class ScratchReader():
-    def __init__(self,thejson):
-        self.thejson = thejson
-        self.projectJSON = []
+    def __init__(self,JSONOrFileName,isFile = False):
+        if (isFile):
+            self.thejson = self.readfile(JSONOrFileName)
+        else:
+            self.thejson = JSONOrFileName
 
     def parseJSON(self):
 	try:
@@ -13,15 +15,10 @@ class ScratchReader():
 	except:
 	    return(None)
  
-"""
-    def __init__(self,thefile):
-        self.thefile = thefile
-        self.projectJSON = [];
-        self.projectString = "";
   
-    def readfile(self):
+    def readfile(self,fileName):
         try:
-            zfile = zipfile.ZipFile(self.thefile,"r")
+            zfile = zipfile.ZipFile(fileName,"r")
         except:
             return None
         try:
@@ -36,13 +33,4 @@ class ScratchReader():
                 
 
     
-    def parseJSON(self):
-		self.projectString = self.readfile()
-		try:
-		    return(json.loads(self.projectString.replace('\t', '').replace('\n','').replace('\r','')))
-		except:
-	#            print("Not A JSON file?")
-		    return(None)
-        
-    
-"""
+
