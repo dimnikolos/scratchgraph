@@ -61,7 +61,7 @@ def jsontoSprites(JSONStruct):
 	if ("scripts" in JSONStruct.keys()):#scripts in the first
 										#level of JSON means that
 										#the stage has scripts
-		spriteList.append(Sprite("stage"))
+		spriteList.append(Sprite("THE SCENE"))
 		for aScript in JSONStruct["scripts"]:
 			spriteList[0].appendScript(flattenScripts(aScript[2]))
 	
