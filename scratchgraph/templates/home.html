@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-	    <meta charset=utf-8 />
-	    <title>ScratchGraph</title>
-    </head>
-    <body>
+  <head>
+    <meta charset=utf-8 />
+    <title>ScratchGraph</title>
+  </head>
+  <body>
     <center>
-        <p>Home | <a href="./about">about</a></p>
-        <p>Paste the url of your Scratch project:</p>
-	<form action="/" method="post">
-          {% csrf_token %}
-          {{ form1 }}
-          <input type="submit" name="URLSubmit" value="Submit" />
-        </form>
-        <br/>OR<br/>
-        <p>Select Scratch project file (.sb2):</p>
-        <form action="/" enctype="multipart/form-data" method="post">
-          {% csrf_token %}
-          {{ form2 }}
-          <input type="submit" name="FileSubmit" value="Submit" />
-        </form>
-    </center>
-    <script>
+      <p>Home | <a href="./about">about</a></p>
+	    <form action="/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <br/><br/>
+    <input type="submit" name="FileSubmit" value="Submit" />
+  </form>
+  </center>
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -30,7 +23,6 @@
   ga('create', 'UA-56556187-1', 'auto');
   ga('send', 'pageview');
 
-    </script>
-    </body>
-    </html>
-
+  </script>
+</body>
+</html>
