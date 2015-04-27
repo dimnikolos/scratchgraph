@@ -31,20 +31,20 @@ def index(request):
         project_url = request.POST['project_url']
 		#leading spaces (useful for mobile pastes)
         project_url = project_url.lstrip()
-        if project_url.startswith('http://scratch.mit.edu/projects/'):
+        if project_url.startswith('https://scratch.mit.edu/projects/'):
           if project_url.endswith('#editor'):
             project_url = project_url[:-7]
           if project_url.endswith('/'):
             project_url = project_url[:-1]
-          project_id = project_url[32:]
+          project_id = project_url[33:]
           projectName = project_id
-          scratchJSONURL = ("http://projects.scratch.mit.edu/"
-		                   "internalapi/project/") + project_id + "/get/"
+          scratchJSONURL = "http://projects.scratch.mit.edu/" + "internalapi/project/" + project_id + "/get/"
           rawJSON = urllib2.urlopen(scratchJSONURL).read()
           if (rawJSON):
             scratchJSON = ScratchReader(rawJSON).parseJSON()
           else:
             urlproblem = True
+            projectName = scratchJSONURL
         else:
             urlproblem = True
     else:
@@ -58,7 +58,7 @@ def index(request):
             else:
                 fileproblem = True
             if fileproblem:
-              projectName = "Problem with file"
+              projectName = scratchJSONURL
               cul = ""
               cug = ""
               graphJSstring = ""
